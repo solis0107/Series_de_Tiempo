@@ -26,3 +26,5 @@ metadata-for-sharing
 url-your-book-url-like-httpsbookdown.orgyihuibookdown
 contextualización
 justificación
+descripción-del-documento
+justificación-del-documento
