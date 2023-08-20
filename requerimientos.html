@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Análisis de Series de Tiempo</title>
+  <title>Capítulo 2 Requerimientos | Análisis de Series de Tiempo</title>
   <meta name="description" content="En este documento se desarrolla el análisis de una serie de tiempo del patron de arrivo de contactos en una linea de atención telefonica, en el marco de la asignatura Análisis de Series de tiempo de la mestria de Ciencia de Datos, Universidad Javeriana Cali." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Análisis de Series de Tiempo" />
+  <meta property="og:title" content="Capítulo 2 Requerimientos | Análisis de Series de Tiempo" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="En este documento se desarrolla el análisis de una serie de tiempo del patron de arrivo de contactos en una linea de atención telefonica, en el marco de la asignatura Análisis de Series de tiempo de la mestria de Ciencia de Datos, Universidad Javeriana Cali." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Análisis de Series de Tiempo" />
+  <meta name="twitter:title" content="Capítulo 2 Requerimientos | Análisis de Series de Tiempo" />
   
   <meta name="twitter:description" content="En este documento se desarrolla el análisis de una serie de tiempo del patron de arrivo de contactos en una linea de atención telefonica, en el marco de la asignatura Análisis de Series de tiempo de la mestria de Ciencia de Datos, Universidad Javeriana Cali." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="análisis-de-descriptivo-y-transformaciones.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -184,19 +184,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="requerimientos" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Requerimientos<a href="requerimientos.html#requerimientos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>En este apartado se detallará el importe y preparación de los datos utilizados al igual que las librerías que se requieren instalar para el desarrollo de este libro.</p>
+<div id="instalación-de-librerias" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Instalación de librerias<a href="requerimientos.html#instalación-de-librerias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="requerimientos.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - readxl [1.4.3]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing readxl ...                         OK [linked from cache in 0.0013s]
+## 
+## Successfully installed 1 package in 16 milliseconds.</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="requerimientos.html#cb3-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;forecast&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - forecast [8.21]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing forecast ...                       OK [linked from cache in 0.0018s]
+## 
+## Successfully installed 1 package in 20 milliseconds.</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="requerimientos.html#cb5-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tseries&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - tseries [0.10-54]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing tseries ...                        OK [linked from cache in 0.0012s]
+## 
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="requerimientos.html#cb7-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;trend&quot;</span>) </span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - trend [1.1.5]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing trend ...                          OK [linked from cache in 0.0014s]
+## 
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="requerimientos.html#cb9-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Kendall&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - Kendall [2.2.1]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing Kendall ...                        OK [linked from cache in 0.0014s]
+## 
+## Successfully installed 1 package in 16 milliseconds.</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="requerimientos.html#cb11-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - ggplot2 [3.4.3]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing ggplot2 ...                        OK [linked from cache in 0.0016s]
+## 
+## Successfully installed 1 package in 15 milliseconds.</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="requerimientos.html#cb13-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggfortify&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - ggfortify [0.4.16]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing ggfortify ...                      OK [linked from cache in 0.0013s]
+## 
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
+</div>
+<div id="importe-de-los-datos" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Importe de los datos<a href="requerimientos.html#importe-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="requerimientos.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb15-2"><a href="requerimientos.html#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="requerimientos.html#cb15-3" tabindex="-1"></a>ruta_archivo <span class="ot">&lt;-</span> <span class="st">&quot;datos.xlsx&quot;</span></span>
+<span id="cb15-4"><a href="requerimientos.html#cb15-4" tabindex="-1"></a>nombre_hoja <span class="ot">&lt;-</span> <span class="st">&quot;datos&quot;</span></span>
+<span id="cb15-5"><a href="requerimientos.html#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="requerimientos.html#cb15-6" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(ruta_archivo, <span class="at">sheet =</span> <span class="st">&#39;datos&#39;</span>)</span></code></pre></div>
+</div>
+<div id="formato" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Formato<a href="requerimientos.html#formato" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es requerido para el desarrollo que la serie de tiempo tenga el formato de fecha en tipo Date</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="requerimientos.html#cb16-1" tabindex="-1"></a>datos<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(datos<span class="sc">$</span>Date)</span></code></pre></div>
+<p>Creación de la serie de tiempo:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="requerimientos.html#cb17-1" tabindex="-1"></a>serie_tiempo <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos<span class="sc">$</span>Volume, <span class="at">start =</span> <span class="fu">min</span>(datos<span class="sc">$</span>Date), <span class="at">frequency =</span> <span class="dv">7</span>)</span></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-de-descriptivo-y-transformaciones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -227,7 +328,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/%s",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/Desarrollo.Rmd",
 "text": "Edit"
 },
 "history": {
