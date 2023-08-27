@@ -43,3 +43,7 @@ analisis-de-estacionalidad
 análisis-de-estacionariedad
 análisis-de-rezagos
 tranformación-diferenciación
+modelado
+regresión-lineal
+suavisamiento-exponencial-simple
+suavisamiento-exponencial-triple-holt-winters
