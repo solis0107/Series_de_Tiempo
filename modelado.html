@@ -23,7 +23,7 @@
 <meta name="author" content="Johnattan Solis" />
 
 
-<meta name="date" content="2023-08-27" />
+<meta name="date" content="2023-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="modelado.html"><a href="modelado.html#regresión-lineal"><i class="fa fa-check"></i><b>4.1</b> Regresión Lineal</a></li>
 <li class="chapter" data-level="4.2" data-path="modelado.html"><a href="modelado.html#suavisamiento-exponencial-simple"><i class="fa fa-check"></i><b>4.2</b> Suavisamiento Exponencial Simple</a></li>
 <li class="chapter" data-level="4.3" data-path="modelado.html"><a href="modelado.html#suavisamiento-exponencial-triple-holt-winters"><i class="fa fa-check"></i><b>4.3</b> Suavisamiento Exponencial Triple (Holt-Winters)</a></li>
+<li class="chapter" data-level="4.4" data-path="modelado.html"><a href="modelado.html#modelo-arima"><i class="fa fa-check"></i><b>4.4</b> Modelo ARIMA</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="modelado.html"><a href="modelado.html#analisis-de-residuales-en-modelo-arima"><i class="fa fa-check"></i><b>4.4.1</b> Analisis de residuales en modelo Arima</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -195,14 +199,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="regresión-lineal" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Regresión Lineal<a href="modelado.html#regresión-lineal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Analicemos el modelado de esta serie de tiempo con una regresión lineal; si bien, la regresión no va a ser util para modelar esta serie de tiempo, nos dará una vista general de la tendencia de los datos.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="modelado.html#cb41-1" tabindex="-1"></a><span class="fu">plot</span>(serie_tiempo)</span>
-<span id="cb41-2"><a href="modelado.html#cb41-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">reg =</span> <span class="fu">lm</span>(serie_tiempo <span class="sc">~</span> <span class="fu">time</span>(serie_tiempo)))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelado.html#cb47-1" tabindex="-1"></a><span class="fu">plot</span>(serie_tiempo)</span>
+<span id="cb47-2"><a href="modelado.html#cb47-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">reg =</span> <span class="fu">lm</span>(serie_tiempo <span class="sc">~</span> <span class="fu">time</span>(serie_tiempo)))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="suavisamiento-exponencial-simple" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Suavisamiento Exponencial Simple<a href="modelado.html#suavisamiento-exponencial-simple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>el suavisamiento exponencial es especialmente útil cuando se trabaja con datos que muestran tendencias y patrones suaves, pero no poseen patrones estacionales o cíclicos pronunciados. Dado que nuestra serie presenta una fuerte estacionalidad, no se espera que este método genere un buen ajuste a la serie. Analicemos su comportamiento:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelado.html#cb42-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modelado.html#cb48-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
 <pre><code>## Registered S3 methods overwritten by &#39;forecast&#39;:
 ##   method                 from     
 ##   autoplot.Arima         ggfortify
@@ -217,19 +221,145 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   fitted.ar              ggfortify
 ##   fortify.ts             ggfortify
 ##   residuals.ar           ggfortify</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modelado.html#cb44-1" tabindex="-1"></a>fcast_ses <span class="ot">&lt;-</span> <span class="fu">ses</span>(serie_tiempo, <span class="at">h =</span> <span class="dv">12</span>)</span>
-<span id="cb44-2"><a href="modelado.html#cb44-2" tabindex="-1"></a><span class="fu">autoplot</span>(fcast_ses) <span class="sc">+</span> <span class="fu">autolayer</span>(<span class="fu">fitted</span>(fcast_ses), <span class="at">series=</span><span class="st">&quot;Fitted&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelado.html#cb50-1" tabindex="-1"></a>fcast_ses <span class="ot">&lt;-</span> <span class="fu">ses</span>(serie_tiempo, <span class="at">h =</span> <span class="dv">12</span>)</span>
+<span id="cb50-2"><a href="modelado.html#cb50-2" tabindex="-1"></a><span class="fu">autoplot</span>(fcast_ses) <span class="sc">+</span> <span class="fu">autolayer</span>(<span class="fu">fitted</span>(fcast_ses), <span class="at">series=</span><span class="st">&quot;Fitted&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Como era de esperarse, el suavisamiento exponencial simple no logra seguir la fuerte estacionalidad que tiene la serie de tiempo.</p>
 </div>
 <div id="suavisamiento-exponencial-triple-holt-winters" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Suavisamiento Exponencial Triple (Holt-Winters)<a href="modelado.html#suavisamiento-exponencial-triple-holt-winters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A continuación analizaremos el comportamiento del modelado Hold-Winters en la serie de tiempo, como se habia provado anteriormente, esta serie tiene estacionalidad y tendencia, por lo que se espera tener buenos resultados con este modelo.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modelado.html#cb45-1" tabindex="-1"></a>mod1 <span class="ot">=</span>  <span class="fu">HoltWinters</span>(serie_tiempo, <span class="at">seasonal =</span> <span class="st">&quot;additive&quot;</span>)</span>
-<span id="cb45-2"><a href="modelado.html#cb45-2" tabindex="-1"></a><span class="fu">plot</span>(mod1)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modelado.html#cb51-1" tabindex="-1"></a>mod1 <span class="ot">=</span>  <span class="fu">HoltWinters</span>(serie_tiempo, <span class="at">seasonal =</span> <span class="st">&quot;additive&quot;</span>)</span>
+<span id="cb51-2"><a href="modelado.html#cb51-2" tabindex="-1"></a><span class="fu">plot</span>(mod1)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>De forma general, se puede ver un buen ajuste del modelo a los datos, no solo en la tendencia que estos llevan sino también en la fuerte estacionalidad que tiene la serie de tiempo. El modelo es capaz de respetar tanto los</p>
+</div>
+<div id="modelo-arima" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Modelo ARIMA<a href="modelado.html#modelo-arima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Como lo hemos visto en el analisis descriptivo y en el modelado de regresión lineal, nuestra serie no es estacionaria, al intentar utilizar un modelo ARIMA se debe garantizar que la serie de tiempo es estacionaria. Para esto se realizará una transformación a la serie para lograr que esta sea estacionaria utilizando la función adf.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelado.html#cb52-1" tabindex="-1"></a><span class="fu">library</span>(aTSA)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;aTSA&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:forecast&#39;:
+## 
+##     forecast</code></pre>
+<pre><code>## The following objects are masked from &#39;package:tseries&#39;:
+## 
+##     adf.test, kpss.test, pp.test</code></pre>
+<pre><code>## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     identify</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelado.html#cb57-1" tabindex="-1"></a><span class="fu">adf.test</span>(<span class="fu">diff</span>(serie_tiempo))</span></code></pre></div>
+<pre><code>## Augmented Dickey-Fuller Test 
+## alternative: stationary 
+##  
+## Type 1: no drift no trend 
+##      lag   ADF p.value
+## [1,]   0 -22.7    0.01
+## [2,]   1 -19.0    0.01
+## [3,]   2 -16.0    0.01
+## [4,]   3 -14.2    0.01
+## [5,]   4 -18.8    0.01
+## [6,]   5 -26.9    0.01
+## Type 2: with drift no trend 
+##      lag   ADF p.value
+## [1,]   0 -22.7    0.01
+## [2,]   1 -19.0    0.01
+## [3,]   2 -16.0    0.01
+## [4,]   3 -14.2    0.01
+## [5,]   4 -18.8    0.01
+## [6,]   5 -26.9    0.01
+## Type 3: with drift and trend 
+##      lag   ADF p.value
+## [1,]   0 -22.7    0.01
+## [2,]   1 -19.0    0.01
+## [3,]   2 -15.9    0.01
+## [4,]   3 -14.2    0.01
+## [5,]   4 -18.7    0.01
+## [6,]   5 -26.9    0.01
+## ---- 
+## Note: in fact, p.value = 0.01 means p.value &lt;= 0.01</code></pre>
+<p>Con este resultado confirmamos que la serie ya se encuentra estacionaria.</p>
+<p>Encontramos los parametros ARIMA de la serie de tiempo utilizando la funcion auto.arima</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modelado.html#cb59-1" tabindex="-1"></a>modelo<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(<span class="fu">diff</span>(serie_tiempo),  <span class="at">seasonal =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="modelado.html#cb60-1" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>## Series: diff(serie_tiempo) 
+## ARIMA(3,0,2) with zero mean 
+## 
+## Coefficients:
+##          ar1      ar2      ar3      ma1     ma2
+##       0.8245  -0.4386  -0.2411  -1.5124  0.7799
+## s.e.  0.0690   0.0690   0.0623   0.0464  0.0477
+## 
+## sigma^2 = 3395:  log likelihood = -1764.57
+## AIC=3541.14   AICc=3541.4   BIC=3563.78
+## 
+## Training set error measures:
+##                      ME     RMSE      MAE      MPE     MAPE      MASE
+## Training set -0.3987745 57.81435 46.44426 68.63847 210.5593 0.9619898
+##                     ACF1
+## Training set -0.04708994</code></pre>
+<p>Utilizando estos parametros para hacer predicciones en el modelo</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="modelado.html#cb62-1" tabindex="-1"></a>modelo_arima <span class="ot">&lt;-</span> <span class="fu">arima</span>(<span class="fu">diff</span>(serie_tiempo), <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
+<span id="cb62-2"><a href="modelado.html#cb62-2" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="modelado.html#cb62-3" tabindex="-1"></a>n_predicciones <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb62-4"><a href="modelado.html#cb62-4" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_arima, <span class="at">n.ahead =</span> n_predicciones)</span>
+<span id="cb62-5"><a href="modelado.html#cb62-5" tabindex="-1"></a></span>
+<span id="cb62-6"><a href="modelado.html#cb62-6" tabindex="-1"></a><span class="co"># Visualiza las predicciones</span></span>
+<span id="cb62-7"><a href="modelado.html#cb62-7" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">diff</span>(serie_tiempo) , <span class="at">main =</span> <span class="st">&quot;Serie Temporal y Predicciones&quot;</span>)</span>
+<span id="cb62-8"><a href="modelado.html#cb62-8" tabindex="-1"></a><span class="fu">lines</span>(predicciones<span class="sc">$</span>pred, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)  <span class="co"># Línea de predicciones</span></span>
+<span id="cb62-9"><a href="modelado.html#cb62-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;Predicciones&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Veamos el ajuste del modelo a la serie de tiempo:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="modelado.html#cb63-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb63-2"><a href="modelado.html#cb63-2" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="modelado.html#cb63-3" tabindex="-1"></a><span class="co"># Graficar la serie de tiempo original</span></span>
+<span id="cb63-4"><a href="modelado.html#cb63-4" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">diff</span>(serie_tiempo), <span class="at">main =</span> <span class="st">&quot;Serie Temporal vs. Modelo ARIMA&quot;</span>)</span>
+<span id="cb63-5"><a href="modelado.html#cb63-5" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="modelado.html#cb63-6" tabindex="-1"></a><span class="co"># Agregar las predicciones del modelo ARIMA al gráfico</span></span>
+<span id="cb63-7"><a href="modelado.html#cb63-7" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">fitted</span>(modelo_arima), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,  <span class="at">lwd =</span> <span class="fl">0.5</span>)  <span class="co"># Línea de predicciones</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>La serie logra captar los patrones de estacionariedad, se confirma nuevamente que la serie quedo estacionaria, no se evidencian patrones de tendencia en el comportamiento de esta. Si bien aún no podemos definir que modelo se ajustó mejor porque no hemos definido medidas de desempeño, pero para la serie sin tendencia este parece tener un buen ajuste.</p>
+<div id="analisis-de-residuales-en-modelo-arima" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Analisis de residuales en modelo Arima<a href="modelado.html#analisis-de-residuales-en-modelo-arima" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para que el modelo pueda ser utilizado se debe garantizar que este tiene ruido blanco, por lo que haremos verificaciones de normalidad, independencia y homocedasticidad y media cero en los errores.</p>
+<div id="normalidad" class="section level4 hasAnchor" number="4.4.1.1">
+<h4><span class="header-section-number">4.4.1.1</span> Normalidad<a href="modelado.html#normalidad" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Ho: Los errores distribuyen normal
+H1: Los errores no distribuyen normal</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="modelado.html#cb64-1" tabindex="-1"></a>residuales<span class="ot">&lt;-</span>modelo_arima<span class="sc">$</span>residuals</span>
+<span id="cb64-2"><a href="modelado.html#cb64-2" tabindex="-1"></a><span class="fu">qqnorm</span>(residuales)</span>
+<span id="cb64-3"><a href="modelado.html#cb64-3" tabindex="-1"></a><span class="fu">qqline</span>(residuales)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="modelado.html#cb65-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(residuales)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuales
+## W = 0.99528, p-value = 0.4369</code></pre>
+<p>Con un nivel de significancia de 0.05 no se puede concluir que los errores no siguen una distribución normal. Esto se reafirma en la grafica, la cual muestra un comportamiento muy señido a la linea de normalidad.</p>
+</div>
+<div id="homocedastidad-y-media-cero" class="section level4 hasAnchor" number="4.4.1.2">
+<h4><span class="header-section-number">4.4.1.2</span> Homocedastidad y media cero<a href="modelado.html#homocedastidad-y-media-cero" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="modelado.html#cb67-1" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">residuals</span>(modelo_arima))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Del análisis visual que nos da gráfica, se puede concluir que los errores si están centrados en cero pero estos no tienen una varianza constante, por lo que existe heterocedastidad.</p>
+</div>
+<div id="independencia" class="section level4 hasAnchor" number="4.4.1.3">
+<h4><span class="header-section-number">4.4.1.3</span> Independencia<a href="modelado.html#independencia" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Ho: Los residuo son independientes
+H1: Los residuos son dependientes</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="modelado.html#cb68-1" tabindex="-1"></a><span class="fu">Box.test</span>(residuales,<span class="at">type =</span> <span class="st">&quot;Ljung-Box&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Ljung test
+## 
+## data:  residuales
+## X-squared = 0.72194, df = 1, p-value = 0.3955</code></pre>
+<p>A un nivel de significancia de 0.05 no se puede concluir que los residuos no son independientes.</p>
+<p>Si bien la mayoria de los supuestos se cumplen, los residuos presentan heterosedasticisas, su varianza varia en el tiempo, por lo que no se puede decir que le modelo presenta ruido blanco.</p>
 
+</div>
+</div>
 </div>
 </div>
             </section>

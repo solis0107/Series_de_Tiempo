@@ -47,3 +47,8 @@ modelado
 regresión-lineal
 suavisamiento-exponencial-simple
 suavisamiento-exponencial-triple-holt-winters
+modelo-arima
+analisis-de-residuales-en-modelo-arima
+normalidad
+homocedastidad-y-media-cero
+independencia

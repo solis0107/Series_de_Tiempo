@@ -23,7 +23,7 @@
 <meta name="author" content="Johnattan Solis" />
 
 
-<meta name="date" content="2023-08-27" />
+<meta name="date" content="2023-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="modelado.html"><a href="modelado.html#regresión-lineal"><i class="fa fa-check"></i><b>4.1</b> Regresión Lineal</a></li>
 <li class="chapter" data-level="4.2" data-path="modelado.html"><a href="modelado.html#suavisamiento-exponencial-simple"><i class="fa fa-check"></i><b>4.2</b> Suavisamiento Exponencial Simple</a></li>
 <li class="chapter" data-level="4.3" data-path="modelado.html"><a href="modelado.html#suavisamiento-exponencial-triple-holt-winters"><i class="fa fa-check"></i><b>4.3</b> Suavisamiento Exponencial Triple (Holt-Winters)</a></li>
+<li class="chapter" data-level="4.4" data-path="modelado.html"><a href="modelado.html#modelo-arima"><i class="fa fa-check"></i><b>4.4</b> Modelo ARIMA</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="modelado.html"><a href="modelado.html#analisis-de-residuales-en-modelo-arima"><i class="fa fa-check"></i><b>4.4.1</b> Analisis de residuales en modelo Arima</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -204,21 +208,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## # Installing packages --------------------------------------------------------
 ## 
-## - Installing readxl ...                         OK [linked from cache in 0.0022s]
+## - Installing readxl ...                         OK [linked from cache in 0.0029s]
 ## 
-## Successfully installed 1 package in 20 milliseconds.</code></pre>
+## Successfully installed 1 package in 18 milliseconds.</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="requerimientos.html#cb3-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;forecast&quot;</span>)</span></code></pre></div>
 <pre><code>## The following package(s) will be installed:
 ## 
-## - forecast [8.21]
+## - forecast [8.21.1]
 ## 
 ## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
 ## 
 ## # Installing packages --------------------------------------------------------
 ## 
-## - Installing forecast ...                       OK [linked from cache in 0.0012s]
+## - Installing forecast ...                       OK [linked from cache in 0.0014s]
 ## 
-## Successfully installed 1 package in 13 milliseconds.</code></pre>
+## Successfully installed 1 package in 16 milliseconds.</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="requerimientos.html#cb5-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tseries&quot;</span>)</span></code></pre></div>
 <pre><code>## The following package(s) will be installed:
 ## 
@@ -230,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## - Installing tseries ...                        OK [linked from cache in 0.0013s]
 ## 
-## Successfully installed 1 package in 16 milliseconds.</code></pre>
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="requerimientos.html#cb7-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;trend&quot;</span>) </span></code></pre></div>
 <pre><code>## The following package(s) will be installed:
 ## 
@@ -242,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## - Installing trend ...                          OK [linked from cache in 0.0013s]
 ## 
-## Successfully installed 1 package in 15 milliseconds.</code></pre>
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="requerimientos.html#cb9-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Kendall&quot;</span>)</span></code></pre></div>
 <pre><code>## The following package(s) will be installed:
 ## 
@@ -252,9 +256,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## # Installing packages --------------------------------------------------------
 ## 
-## - Installing Kendall ...                        OK [linked from cache in 0.0015s]
+## - Installing Kendall ...                        OK [linked from cache in 0.0013s]
 ## 
-## Successfully installed 1 package in 17 milliseconds.</code></pre>
+## Successfully installed 1 package in 15 milliseconds.</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="requerimientos.html#cb11-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
 <pre><code>## The following package(s) will be installed:
 ## 
@@ -264,9 +268,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## # Installing packages --------------------------------------------------------
 ## 
-## - Installing ggplot2 ...                        OK [linked from cache in 0.0012s]
+## - Installing ggplot2 ...                        OK [linked from cache in 0.0017s]
 ## 
-## Successfully installed 1 package in 18 milliseconds.</code></pre>
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="requerimientos.html#cb13-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggfortify&quot;</span>)</span></code></pre></div>
 <pre><code>## The following package(s) will be installed:
 ## 
@@ -276,25 +280,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## # Installing packages --------------------------------------------------------
 ## 
-## - Installing ggfortify ...                      OK [linked from cache in 0.0019s]
+## - Installing ggfortify ...                      OK [linked from cache in 0.0012s]
 ## 
-## Successfully installed 1 package in 18 milliseconds.</code></pre>
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="requerimientos.html#cb15-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lubridate&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - lubridate [1.9.2]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing lubridate ...                      OK [linked from cache in 0.0013s]
+## 
+## Successfully installed 1 package in 14 milliseconds.</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="requerimientos.html#cb17-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;aTSA&quot;</span>)</span></code></pre></div>
+<pre><code>## The following package(s) will be installed:
+## 
+## - aTSA [3.1.2]
+## 
+## These packages will be installed into &quot;C:/Users/JSOLISP/OneDrive - TCC/Escritorio/PERSN/Universidad/Series_de_tiempo/PROYECTO_BOOKDOWN/renv/library/R-4.3/x86_64-w64-mingw32&quot;.
+## 
+## # Installing packages --------------------------------------------------------
+## 
+## - Installing aTSA ...                           OK [linked from cache in 0.0014s]
+## 
+## Successfully installed 1 package in 16 milliseconds.</code></pre>
 </div>
 <div id="importe-de-los-datos" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Importe de los datos<a href="requerimientos.html#importe-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="requerimientos.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb15-2"><a href="requerimientos.html#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="requerimientos.html#cb15-3" tabindex="-1"></a>ruta_archivo <span class="ot">&lt;-</span> <span class="st">&quot;datos.xlsx&quot;</span></span>
-<span id="cb15-4"><a href="requerimientos.html#cb15-4" tabindex="-1"></a>nombre_hoja <span class="ot">&lt;-</span> <span class="st">&quot;datos&quot;</span></span>
-<span id="cb15-5"><a href="requerimientos.html#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="requerimientos.html#cb15-6" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(ruta_archivo, <span class="at">sheet =</span> <span class="st">&#39;datos&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="requerimientos.html#cb19-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb19-2"><a href="requerimientos.html#cb19-2" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="requerimientos.html#cb19-3" tabindex="-1"></a>ruta_archivo <span class="ot">&lt;-</span> <span class="st">&quot;datos.xlsx&quot;</span></span>
+<span id="cb19-4"><a href="requerimientos.html#cb19-4" tabindex="-1"></a>nombre_hoja <span class="ot">&lt;-</span> <span class="st">&quot;datos&quot;</span></span>
+<span id="cb19-5"><a href="requerimientos.html#cb19-5" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="requerimientos.html#cb19-6" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(ruta_archivo, <span class="at">sheet =</span> <span class="st">&#39;datos&#39;</span>)</span></code></pre></div>
 </div>
 <div id="formato" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Formato<a href="requerimientos.html#formato" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tipos de datos Originales:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="requerimientos.html#cb20-1" tabindex="-1"></a>data_types <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datos, class)</span>
+<span id="cb20-2"><a href="requerimientos.html#cb20-2" tabindex="-1"></a><span class="fu">print</span>(data_types)</span></code></pre></div>
+<pre><code>##        Date       Month        Year        Week         day      Volume 
+## &quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;</code></pre>
 <p>Es requerido para el desarrollo que la serie de tiempo tenga el formato de fecha en tipo Date</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="requerimientos.html#cb16-1" tabindex="-1"></a>datos<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(datos<span class="sc">$</span>Date)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="requerimientos.html#cb22-1" tabindex="-1"></a>datos<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(datos<span class="sc">$</span>Date)</span></code></pre></div>
 <p>Creación de la serie de tiempo:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="requerimientos.html#cb17-1" tabindex="-1"></a>serie_tiempo <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos<span class="sc">$</span>Volume, <span class="at">start =</span> <span class="fu">min</span>(datos<span class="sc">$</span>Date), <span class="at">frequency =</span> <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="requerimientos.html#cb23-1" tabindex="-1"></a>serie_tiempo <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos<span class="sc">$</span>Volume, <span class="at">start =</span> <span class="fu">min</span>(datos<span class="sc">$</span>Date), <span class="at">frequency =</span> <span class="dv">7</span>)</span></code></pre></div>
 </div>
 </div>
             </section>
