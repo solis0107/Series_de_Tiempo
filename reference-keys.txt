@@ -52,3 +52,13 @@ analisis-de-residuales-en-modelo-arima
 normalidad
 homocedastidad-y-media-cero
 independencia
+modelo-prohet
+modelo-redes-neuronales-de-elman-y-jordan
+normalizar-la-serie-de-tiempo
+definir-train-set-y-test-set
+creación-de-secuencias
+diseño-de-la-arquitectura-de-la-red
+entrenamiento-de-la-red
+validación-y-ajuste-de-hiperparámetros
+modelo-red-neuronal-de-jordan
+entrenamiento-del-modelo
